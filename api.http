@@ -1,0 +1,31 @@
+### Register User
+POST http://localhost:8000/auth/create
+Content-Type: application/json
+
+{
+    "name":"Carlos",
+    "last_name":"Carlos",
+    "email":"carlos2@gmail.com",
+    "password":"123456789"
+}
+
+### Login User
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "email":"carlos1@gmail.com",
+    "password":"123456789"
+}
+
+### Update User
+PUT http://localhost:8000/auth/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IkNhcmxvcyIsImxhc3RfbmFtZSI6IkNhcmxvcyIsImVtYWlsIjoiY2FybG9zMUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRHclBwUWJ2RzUwQXJNYmFYa0hPNGd1a3pHNEY4eFQ0Lmp0OHBVcjVXek0xNzlSYXVLb0RXdSIsImNyZWF0ZWRfYXQiOiIyMDIwLTEwLTI0VDE2OjI5OjAyLjAwMFoiLCJ1cGRhdGVfYXQiOiIyMDIwLTEwLTI0VDE2OjI5OjAyLjAwMFoiLCJpYXQiOjE2MDM1NTkyMzMsImV4cCI6MTYwMzU2MjgzM30.J2-IlNhdcVa96w2V3jA94itfuBCoUmEfWB-qp3c0sQw
+
+{
+    "name":"newName",
+    "last_name":"newName",
+    "email":"newEmailssss@gmail.com",
+    "password":"newPass123456"
+}
