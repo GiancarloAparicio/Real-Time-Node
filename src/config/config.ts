@@ -7,7 +7,7 @@ export const APP_ENV = process.env.APP_ENV;
 export const APP_KEY = process.env.APP_KEY;
 export const APP_KEY_JWT = process.env.APP_KEY_JWT;
 export const APP_DEBUG = process.env.APP_DEBUG;
-export const APP_PORT = process.env.APP_PORT;
+export const APP_PORT = process.env.APP_PORT || 8000;
 export const APP_URL = process.env.APP_URL;
 export const APP_PATH_FILE = process.env.APP_PATH_FILE;
 

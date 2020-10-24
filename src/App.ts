@@ -37,17 +37,13 @@ export default class App {
 
 	private config() {
 		this.app.set('port', APP_PORT);
-
 		this.app.set('view engine', 'pug');
 		this.app.set('views', path.join(__dirname, './views'));
+		this.app.use(express.static(path.join(__dirname, `${APP_PATH_FILE}`)));
 	}
 
 	private middlewares() {
 		this.app.use(morgan(APP_ENV === 'local' ? 'dev' : 'common'));
-		this.app.use(
-			`${APP_PATH_FILE}`,
-			express.static(path.resolve(`${APP_PATH_FILE}`))
-		);
 		this.app.use(helmet());
 		this.app.use(cors());
 		this.app.use(compression());
@@ -67,7 +63,8 @@ export default class App {
 	}
 
 	listen(port: number = 8000) {
-		this.app.listen(this.app.get('port') || port);
+		this.app.listen(port || APP_PORT);
+
 		console.log(`APP port: ${this.app.get('port')}`);
 	}
 

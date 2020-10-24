@@ -7,6 +7,4 @@ build
 **/**/*.log
 src/app/exceptions/logs/*.log
 
-src/public/**/*.*
-
 package-lock.json

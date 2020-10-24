@@ -6,7 +6,11 @@ import NotFoundException from '../../errors/exceptions/NotFoundException';
 import AuthenticationException from '../../errors/exceptions/AuthenticationException';
 
 export default (req: Request, res: Response, next: NextFunction) => {
-	if (req.path !== '/auth/login' && req.path !== '/auth/create') {
+	if (
+		req.path !== '/auth/login' &&
+		req.path !== '/auth/create' &&
+		req.path !== '/chat'
+	) {
 		if (req.headers.authorization) {
 			let token = req.headers.authorization.split(' ')[1];
 
@@ -27,7 +31,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
 				}
 			});
 		}
-	} else if (req.method == 'POST') {
+	} else if (req.method == 'POST' || req.path == '/chat') {
 		Reply.response = res;
 		Reply.next = next;
 		Reply.request = req;
