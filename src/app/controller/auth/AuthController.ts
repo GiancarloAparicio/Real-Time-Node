@@ -1,6 +1,7 @@
 import Reply from '../../services/Reply';
 import { Request, Response } from 'express';
 import { signJWT } from '../../helpers/JWT';
+import { APP_HOST } from '../../../config/config';
 import UserRepository from '../../repositories/UserRepository';
 import { encryptTo, matchEncryptTo } from '../../helpers/helper';
 
@@ -31,8 +32,6 @@ export default class AuthController {
 			...validated,
 			password: await encryptTo(validated.password),
 		};
-
-		console.log(validated, userValidate);
 
 		let user = await UserRepository.create(userValidate);
 

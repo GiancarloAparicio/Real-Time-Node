@@ -4,8 +4,16 @@ import path from 'path';
 import { getRepository } from 'typeorm';
 
 export default class ChatController {
-	static async index(req: Request, res: Response) {
-		return res.render('./pages/index');
+	static async home(req: Request, res: Response) {
+		return res.render('./pages/home', { status: true });
+	}
+
+	static async login(req: Request, res: Response) {
+		return res.render('./pages/login', { status: false });
+	}
+
+	static async sing(req: Request, res: Response) {
+		return res.render('./pages/sing', { status: false });
 	}
 
 	static async create(req: Request, res: Response) {
@@ -14,7 +22,7 @@ export default class ChatController {
 	}
 
 	static async store(req: Request, res: Response) {
-		return res.json(req.body);
+		return res.json({ store: 'send store', body: req.body });
 	}
 
 	static async show(req: Request, res: Response) {

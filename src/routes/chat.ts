@@ -3,7 +3,11 @@ import ChatController from '../app/controller/ChatController';
 
 const chat = Router();
 
-chat.get('/', ChatController.index);
+//views
+chat.get('/', ChatController.home);
+chat.get('/login', ChatController.login);
+chat.get('/sing', ChatController.sing);
+
 chat.get('/create', ChatController.create);
 chat.post('/', ChatController.store);
 chat.get('/:id', ChatController.show);

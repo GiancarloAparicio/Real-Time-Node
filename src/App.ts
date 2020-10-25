@@ -1,5 +1,5 @@
 import path from 'path';
-//import 'reflect-metadata';
+import cors from 'cors';
 import morgan from 'morgan';
 import * as www from './config/www';
 import { createConnection } from 'typeorm';
@@ -41,6 +41,7 @@ export default class App {
 
 	private middlewares() {
 		this.app.use(morgan(APP_ENV === 'local' ? 'dev' : 'common'));
+		this.app.use(cors());
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: false }));
 		this.app.use(AuthJWT);
@@ -50,6 +51,10 @@ export default class App {
 		for (let route in routes) {
 			this.app.use(`/${route}`, routes[route]);
 		}
+
+		this.app.get('*', function (req, res) {
+			res.status(404).send('what???');
+		});
 	}
 
 	private typeOrm() {

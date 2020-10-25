@@ -1,0 +1,13 @@
+mixin Input(label,placeholder,description)
+    div(class="form-group")
+        label(class="d-table mx-auto")= label
+
+            if(label.toLowerCase()=="email")
+                input(type="email" name=label.toLowerCase() class="form-control" placeholder=placeholder required)
+            else if(label.toLowerCase()=="password")
+                input(type="password" name=label.toLowerCase() class="form-control" placeholder=placeholder required)
+            else
+                 input(type="text" name=label.toLowerCase() class="form-control" placeholder=placeholder required)
+                
+            if(description)
+                small(id="emailHelp" class="form-text text-muted")= description

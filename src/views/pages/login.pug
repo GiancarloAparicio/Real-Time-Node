@@ -1,0 +1,14 @@
+extends ../layout
+
+include ../components/Input
+
+block content
+    .row
+        .col-6.mx-auto
+            form( method="POST" action=host+"/auth/login" @submit.prevent="loginUser")
+                legend(class="text-center") Login
+                +Input("Email","Enter email")
+                +Input("Password","Enter pass")
+                .d-table.mx-auto
+                    button(class="mx-2 btn btn-success") Send
+                    button(class="mx-2 btn btn-danger") Cancel

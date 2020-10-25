@@ -20,6 +20,8 @@ const handleErrors = (
 		});
 	}
 
+	console.log('handle error');
+
 	let error = err.build();
 
 	if (err instanceof ValidationException) {
@@ -45,8 +47,6 @@ const handleErrors = (
 		log.error(`Not-Found-Exception:  ${error.details} (${error.code})`);
 		res.status(error.code).json(error);
 	}
-
-	return res.end();
 
 	//!! Fix the error that occurs with next()
 	//TODO Calling next() passes the HandleError middleware, but then returns control to the middleware where next() was used

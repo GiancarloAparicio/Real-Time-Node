@@ -34,9 +34,12 @@ export async function matchEncryptTo(
 
 	if (exception) {
 		Reply.next(
-			new AuthenticationException({
-				details: 'Password incorrect',
-			})
+			new AuthenticationException(
+				{
+					details: 'Password incorrect',
+				},
+				'Incorrect,string does not correspond to the hash'
+			)
 		);
 	}
 

@@ -4,6 +4,7 @@ import { APP_KEY_JWT } from '../../../config/config';
 import { Request, Response, NextFunction } from 'express';
 import NotFoundException from '../../errors/exceptions/NotFoundException';
 import AuthenticationException from '../../errors/exceptions/AuthenticationException';
+import AuthorizationException from '../../errors/exceptions/AuthorizationException';
 
 export default (req: Request, res: Response, next: NextFunction) => {
 	if (
@@ -17,10 +18,13 @@ export default (req: Request, res: Response, next: NextFunction) => {
 			jwt.verify(token, `${APP_KEY_JWT}`, function (error, decoded) {
 				if (error) {
 					next(
-						new AuthenticationException({
-							title: 'Authentication',
-							details: 'Forbidden',
-						})
+						new AuthenticationException(
+							{
+								title: 'Authentication',
+								details: 'Forbidden',
+							},
+							'Password does not correspond to the hash'
+						)
 					);
 				} else {
 					req.body.decoded = decoded;
@@ -30,8 +34,22 @@ export default (req: Request, res: Response, next: NextFunction) => {
 					next();
 				}
 			});
+		} else {
+			next(
+				new AuthorizationException(
+					{
+						title: 'Token',
+						details: 'Invalid',
+					},
+					'Invalid token'
+				)
+			);
 		}
-	} else if (req.method == 'POST' || req.path == '/chat') {
+	} else if (
+		req.path == '/auth/login' ||
+		req.path == '/auth/create' ||
+		req.path == '/chat'
+	) {
 		Reply.response = res;
 		Reply.next = next;
 		Reply.request = req;

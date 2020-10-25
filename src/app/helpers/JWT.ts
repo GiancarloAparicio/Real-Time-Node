@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
 import { APP_KEY_JWT } from '../../config/config';
-import Reply from '../services/Reply';
-import AuthenticationException from '../errors/exceptions/AuthenticationException';
 
 /**
  * Digitally sign the "data" object,
