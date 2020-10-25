@@ -1,3 +1,9 @@
+/**
+ * Function for send request Function to send requests through the GET method
+ * @param {String} url
+ * @param {String | null} token
+ * @return {object}
+ */
 const getFetch = async (url, token) => {
 	let headers = {
 		'Content-Type': 'application/json',
@@ -16,6 +22,13 @@ const getFetch = async (url, token) => {
 	return await res.json();
 };
 
+/**
+ * Function for send request Function to send requests through the POST method
+ * @param {String} url
+ * @param {object} data
+ * @param {String | null} token
+ * @return {object}
+ */
 const postFetch = async (url, data, token) => {
 	let headers = {
 		'Content-Type': 'application/json',
@@ -34,3 +47,9 @@ const postFetch = async (url, data, token) => {
 
 	return await res.json();
 };
+
+/**
+ * Function to get an element from the DOM
+ * @param {String} selector
+ */
+const getElement = document.querySelector.bind(document);

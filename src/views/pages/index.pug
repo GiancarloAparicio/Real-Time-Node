@@ -1,0 +1,14 @@
+extends ../layout
+
+include ./Home
+include ./Login
+include ./Sing
+
+block content
+
+    div(v-if="router.home")
+        +Home()
+    div(v-if="router.login")
+        +Login()
+    div(v-if="router.sing")
+        +Sing()

@@ -1,8 +1,6 @@
-extends ../layout
-
 include ../components/Input
 
-block content
+mixin Login
     .row
         .col-6.mx-auto
             form( method="POST" action=host+"/auth/login" @submit.prevent="loginUser")
