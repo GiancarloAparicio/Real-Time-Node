@@ -1,10 +1,7 @@
-import cors from 'cors';
 import path from 'path';
-import 'reflect-metadata';
+//import 'reflect-metadata';
 import morgan from 'morgan';
-import helmet from 'helmet';
 import * as www from './config/www';
-import compression from 'compression';
 import { createConnection } from 'typeorm';
 import routes from './routes/index.routes';
 import handleError from './app/errors/handle';
@@ -44,9 +41,6 @@ export default class App {
 
 	private middlewares() {
 		this.app.use(morgan(APP_ENV === 'local' ? 'dev' : 'common'));
-		this.app.use(helmet());
-		this.app.use(cors());
-		this.app.use(compression());
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({ extended: false }));
 		this.app.use(AuthJWT);
@@ -64,7 +58,6 @@ export default class App {
 
 	listen(port: number = 8000) {
 		this.app.listen(port || APP_PORT);
-
 		console.log(`APP port: ${this.app.get('port')}`);
 	}
 

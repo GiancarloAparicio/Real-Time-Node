@@ -5,7 +5,7 @@ import { getRepository } from 'typeorm';
 
 export default class ChatController {
 	static async index(req: Request, res: Response) {
-		return res.render('index');
+		return res.render('./pages/index');
 	}
 
 	static async create(req: Request, res: Response) {
