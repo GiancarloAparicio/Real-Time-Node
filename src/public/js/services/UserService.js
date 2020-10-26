@@ -24,7 +24,8 @@ class UserService {
 	}
 
 	static async logout() {
-		localStorage.clear();
+		localStorage.removeItem('status');
+		Socket.disconnect();
 		await Route.changeRoute('login');
 	}
 }

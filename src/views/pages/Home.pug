@@ -8,7 +8,7 @@ mixin Home
 
             div( v-for="item in messages"
                 class="m-2 alert alert-dismissible d-table "
-                :class="{'alert-success mr-auto': item.own , 'alert-info ml-auto': !item.own }" 
+                :class="{'alert-success mr-auto': item.user==status.user.email , 'alert-info ml-auto': item.user!=status.user.email }" 
                ) {{item.message}}
                 small(id="emailHelp" class="form-text text-muted") {{item.user}}
                 

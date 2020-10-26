@@ -1,11 +1,11 @@
 const data = {
 	status: JSON.parse(localStorage.getItem('status')) || {},
+	messages: JSON.parse(localStorage.getItem('messages')) || [],
 	router: {
 		login: true,
 		signIn: false,
 		home: false,
 	},
-	messages: [],
 };
 
 const methods = {
@@ -31,7 +31,6 @@ const methods = {
 	},
 
 	addMessage(message) {
-		message.own = this.status.user.email == message.user ? true : false;
 		this.messages = [...this.messages, message];
 	},
 	sendMessage({ target }) {
@@ -42,7 +41,6 @@ const methods = {
 			user: email,
 			token: this.status.token,
 		};
-
 		Socket.sendMessage(message);
 		target.reset();
 	},
@@ -50,10 +48,14 @@ const methods = {
 
 const watch = {
 	status() {
-		if (this.status.user) new Socket(this.addMessage);
+		//if (this.status.user) CloseLogin;
 
 		localStorage.setItem('status', JSON.stringify(this.status));
 		return this.status;
+	},
+	messages() {
+		localStorage.setItem('messages', JSON.stringify(this.messages));
+		return this.messages;
 	},
 };
 
@@ -61,7 +63,7 @@ const computed = {
 	statusUser() {
 		if (this.status.user) {
 			this.changeRoute('home');
-			new Socket(this.addMessage);
+			Socket.connect(this.addMessage);
 		} else {
 			this.changeRoute('login');
 		}
