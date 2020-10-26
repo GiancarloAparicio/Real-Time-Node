@@ -4,11 +4,8 @@ import { APP_PORT } from './config/config';
 
 let app = new App();
 
-let socket = new Socket(app.getApplication());
-socket.listen(APP_PORT);
-
-socket.getSocketIO().on('connection', (socket) => {
-	console.log('new user');
-});
+let webSocket = new Socket(app.getApplication());
+webSocket.listen(APP_PORT);
+webSocket.initializeEvents();
 
 export default app;

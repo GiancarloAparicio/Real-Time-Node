@@ -25,6 +25,6 @@ class UserService {
 
 	static async logout() {
 		localStorage.clear();
-		Route.changeRoute('/login');
+		await Route.changeRoute('login');
 	}
 }

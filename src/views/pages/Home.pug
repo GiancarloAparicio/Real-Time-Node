@@ -1,3 +1,18 @@
+include ../components/InputChat
 
 mixin Home
-    h1 Home
+    div(class="col-12 col-sm-10 col-md-6 col-lg-4 col-xl-4 mx-auto ")
+        h1.card Users
+    form(method="POST" @submit.prevent="sendMessage" class="col-12 col-sm-10 col-md-6 col-lg-8 col-xl-8 mx-auto chat-component")
+        div(class="card chat-messages overflow-auto")
+
+            div( v-for="item in messages"
+                class="m-2 alert alert-dismissible d-table "
+                :class="{'alert-success mr-auto': item.own , 'alert-info ml-auto': !item.own }" 
+               ) {{item.message}}
+                small(id="emailHelp" class="form-text text-muted") {{item.user}}
+                
+        div(class="chat-input")
+            +InputChat("Write message...","message")
+        div(class="chat-send")
+            button(class="btn btn-success") Send

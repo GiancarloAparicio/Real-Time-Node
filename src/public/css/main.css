@@ -1,7 +1,32 @@
-body {
-	overflow: hidden;
-}
-
 a {
 	cursor: pointer;
+}
+
+.chat-component {
+	display: grid !important;
+	grid-template: 90% 10% / 85% 15% !important;
+	grid-template-areas:
+		'messages messages'
+		'input send' !important;
+	padding: 0;
+}
+
+.chat-messages {
+	grid-area: messages !important;
+	max-height: 60vh !important;
+	min-height: 20vh !important;
+}
+
+.chat-input {
+	grid-area: input !important;
+}
+
+.chat-send {
+	grid-area: send !important;
+}
+
+/*Bootstrap*/
+.alert {
+	padding: 5px !important;
+	min-width: 150px !important;
 }

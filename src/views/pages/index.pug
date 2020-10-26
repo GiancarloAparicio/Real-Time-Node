@@ -6,7 +6,7 @@ include ./SignIn
 
 block content
 
-    div(v-if="router.home")
+    div(class="row" v-if="router.home")
         +Home()
     div(v-if="router.login")
         +Login()

@@ -53,3 +53,15 @@ const postFetch = async (url, data, token) => {
  * @param {String} selector
  */
 const getElement = document.querySelector.bind(document);
+
+/**
+ * Check the current path and return only one object with TRUE in the current path
+ *  @return {object}
+ */
+const checkCurrentRoute = () => {
+	let response = {};
+	response.home = Route.showIf('home');
+	response.login = Route.showIf('login');
+	response.signIn = Route.showIf('signIn');
+	return response;
+};

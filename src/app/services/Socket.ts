@@ -12,10 +12,18 @@ export default class Socket {
 
 	listen(port: number | string) {
 		this.server.listen(port);
-		this.io = socketIO.listen(this.server);
+		this.io = socketIO(this.server);
 	}
 
 	getSocketIO() {
 		return this.io;
+	}
+
+	initializeEvents() {
+		this.io.on('connection', (socket) => {
+			socket.on('sendMessage', (data) => {
+				this.io.sockets.emit('newMessage', data);
+			});
+		});
 	}
 }
