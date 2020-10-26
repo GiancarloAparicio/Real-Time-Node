@@ -3,14 +3,15 @@ const data = {
 	status: JSON.parse(localStorage.getItem('status')) || {},
 	router: {
 		login: true,
-		sing: false,
+		signIn: false,
 		home: false,
 	},
 };
 
 const methods = {
 	async loginUser({ target }) {
-		this.status = await UserService.login(target);
+		let response = await UserService.login(target);
+		this.status = response.data[0].attributes;
 	},
 
 	logoutUser() {
@@ -22,12 +23,16 @@ const methods = {
 	handleRouteShow() {
 		this.router.home = Route.showIf('home');
 		this.router.login = Route.showIf('login');
-		this.router.sing = Route.showIf('sing');
+		this.router.signIn = Route.showIf('signIn');
 	},
 
 	async changeRoute(hash) {
 		await Route.changeRoute(hash);
 		this.handleRouteShow();
+	},
+	async signInUser({ target }) {
+		let response = await UserService.signIn(target);
+		this.status = response.data[0].attributes;
 	},
 };
 

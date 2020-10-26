@@ -15,7 +15,7 @@ class Router {
 
 	showIf(path) {
 		let currentPath = window.location.hash.slice(2);
-		return path.toLowerCase() == currentPath;
+		return path.toLowerCase() == currentPath.toLowerCase();
 	}
 }
 

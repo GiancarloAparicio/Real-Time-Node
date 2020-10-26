@@ -7,7 +7,8 @@ class UserRepository {
 	async create(user: any) {
 		try {
 			let newUser = getRepository(User).create(user);
-			return await getRepository(User).save(newUser);
+			let response = await getRepository(User).save(newUser);
+			return { ...response };
 		} catch (error) {
 			Reply.next(
 				new QuerySqlException(
@@ -24,9 +25,7 @@ class UserRepository {
 				where: { email: email || Reply.request.body.email },
 			});
 
-			return {
-				...user,
-			};
+			return { ...user };
 		} catch (error) {
 			Reply.next(
 				new QuerySqlException(
@@ -42,7 +41,8 @@ class UserRepository {
 			let user: any = await getRepository(User).findOne(id);
 
 			getRepository(User).merge(user, userUpdate);
-			return await getRepository(User).save(user);
+			let response = await getRepository(User).save(user);
+			return { ...response };
 		} catch (error) {
 			Reply.next(
 				new QuerySqlException(

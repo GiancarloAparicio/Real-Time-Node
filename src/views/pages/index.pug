@@ -2,7 +2,7 @@ extends ../layout
 
 include ./Home
 include ./Login
-include ./Sing
+include ./SignIn
 
 block content
 
@@ -10,5 +10,5 @@ block content
         +Home()
     div(v-if="router.login")
         +Login()
-    div(v-if="router.sing")
-        +Sing()
+    div(v-if="router.signIn")
+        +SignIn()

@@ -10,7 +10,7 @@ mixin Navbar
 			ul(class="navbar-nav mr-auto")
 				li(class="nav-item" v-if="statusUser" @click="changeRoute('home')")
 					a(class="nav-link" ) Home
-				li(class="nav-item" v-if="!statusUser" @click="changeRoute('sing')")
+				li(class="nav-item" v-if="!statusUser" @click="changeRoute('signIn')")
 					a(class="nav-link" ) Register
 				li(class="nav-item" v-if="!statusUser" @click="changeRoute('login')")
 					a(class="nav-link") Login

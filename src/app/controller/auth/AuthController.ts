@@ -1,9 +1,8 @@
 import Reply from '../../services/Reply';
 import { Request, Response } from 'express';
 import { signJWT } from '../../helpers/JWT';
-import { APP_HOST } from '../../../config/config';
 import UserRepository from '../../repositories/UserRepository';
-import { encryptTo, matchEncryptTo } from '../../helpers/helper';
+import { encryptTo, matchEncryptTo, removeProperty } from '../../helpers/helper';
 
 export default class AuthController {
 	static async login(req: Request, res: Response) {
@@ -14,6 +13,7 @@ export default class AuthController {
 		if (user) {
 			if (await matchEncryptTo(password, user.password)) {
 				return Reply.status(200).success('Login success', {
+					user: removeProperty(user, 'password'),
 					token: signJWT(user),
 				});
 			} else {
@@ -33,10 +33,16 @@ export default class AuthController {
 			password: await encryptTo(validated.password),
 		};
 
+		console.log(userValidate);
+
 		let user = await UserRepository.create(userValidate);
+		console.log(user);
 
 		if (user) {
-			return Reply.status(201).success('User created', user);
+			return Reply.status(201).success('User created', {
+				user: removeProperty(user, 'password'),
+				token: signJWT(user),
+			});
 		}
 	}
 

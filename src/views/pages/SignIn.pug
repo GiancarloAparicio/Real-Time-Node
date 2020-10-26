@@ -1,0 +1,13 @@
+include ../components/Input
+
+mixin SignIn
+    h1 Register User
+    form( method="POST" action=host+"/auth/create" @submit.prevent="signInUser")
+        +Input("Name","Enter name")
+        +Input("Last_name","Enter last name")
+        +Input("Email","Enter email")
+        +Input("Password","Enter pass")
+
+        .d-table.mx-auto
+            button(class="mx-2 btn btn-success") Send
+            button(class="mx-2 btn btn-danger" type="reset") Cancel
