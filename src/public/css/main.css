@@ -2,6 +2,24 @@ a {
 	cursor: pointer;
 }
 
+.photo {
+	width: 50px !important;
+	height: 50px !important;
+	object-fit: cover;
+}
+
+.status {
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	margin: auto;
+}
+
+.offline {
+	filter: grayscale(100);
+}
+
 .chat-component {
 	display: grid !important;
 	grid-template: 90% 10% / 85% 15% !important;

@@ -1,6 +1,7 @@
 const data = {
 	status: JSON.parse(localStorage.getItem('status')) || {},
 	messages: JSON.parse(localStorage.getItem('messages')) || [],
+	users: JSON.parse(localStorage.getItem('users')) || [],
 	router: {
 		login: true,
 		signIn: false,
@@ -19,8 +20,24 @@ const methods = {
 		this.status = response.data[0].attributes;
 	},
 
+	handleUsers(user, boolean) {
+		if (boolean && !elementExistsIn(this.users, user)) {
+			this.users.push({ ...user, status: true });
+		}
+
+		if (boolean && elementExistsIn(this.users, user)) {
+			this.users = this.users.filter((item) => item.email != user.email);
+			this.users.push({ ...user, status: true });
+		}
+
+		if (!boolean) {
+			this.users = this.users.filter((item) => item.email != user.email);
+			this.users.push({ ...user, status: false });
+		}
+	},
+
 	async logoutUser() {
-		await UserService.logout();
+		await UserService.logout(this.status.user);
 		this.status = {};
 		this.router = checkCurrentRoute();
 	},
@@ -57,13 +74,18 @@ const watch = {
 		localStorage.setItem('messages', JSON.stringify(this.messages));
 		return this.messages;
 	},
+
+	users() {
+		localStorage.setItem('users', JSON.stringify(this.users));
+		return this.users;
+	},
 };
 
 const computed = {
 	statusUser() {
 		if (this.status.user) {
 			this.changeRoute('home');
-			Socket.connect(this.addMessage);
+			Socket.connect(this.addMessage, this.status.user, this.handleUsers);
 		} else {
 			this.changeRoute('login');
 		}

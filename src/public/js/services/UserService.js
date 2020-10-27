@@ -23,9 +23,9 @@ class UserService {
 		return await postFetch(formElement.action, user, 'POST');
 	}
 
-	static async logout() {
+	static async logout(user) {
 		localStorage.removeItem('status');
-		Socket.disconnect();
+		Socket.disconnect(user);
 		await Route.changeRoute('login');
 	}
 }

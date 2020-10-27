@@ -65,3 +65,13 @@ const checkCurrentRoute = () => {
 	response.signIn = Route.showIf('signIn');
 	return response;
 };
+
+/**
+ * Check if the user is already in the array (true)
+ * @param {Array<Object>} array
+ * @param {Object} itemCheck
+ */
+const elementExistsIn = (array, itemCheck) => {
+	let band = array.filter((item) => item.email === itemCheck.email);
+	return 0 == band.length ? false : true;
+};

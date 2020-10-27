@@ -24,6 +24,14 @@ export default class Socket {
 			socket.on('sendMessage', (data) => {
 				this.io.sockets.emit('newMessage', data);
 			});
+
+			socket.on('userConnect', (data) => {
+				this.io.sockets.emit('addUser', data);
+			});
+
+			socket.on('userDisconnect', (data) => {
+				this.io.sockets.emit('removeUser', data);
+			});
 		});
 	}
 }
