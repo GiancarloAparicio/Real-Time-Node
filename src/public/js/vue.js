@@ -65,8 +65,6 @@ const methods = {
 
 const watch = {
 	status() {
-		//if (this.status.user) CloseLogin;
-
 		localStorage.setItem('status', JSON.stringify(this.status));
 		return this.status;
 	},

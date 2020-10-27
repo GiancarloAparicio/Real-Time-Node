@@ -7,7 +7,7 @@ mixin Input(label,placeholder,description)
             else if(label.toLowerCase()=="password")
                 input(type="password" name=label.toLowerCase() class="form-control" placeholder=placeholder required)
             else
-                 input(type="text" name=label.toLowerCase() class="form-control" placeholder=placeholder required)
+                input(type="text" name=label.toLowerCase() class="form-control" placeholder=placeholder required)
                 
             if(description)
                 small(id="emailHelp" class="form-text text-muted")= description

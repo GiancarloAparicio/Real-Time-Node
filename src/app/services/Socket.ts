@@ -1,6 +1,7 @@
-import http, { Server as HttpServer } from 'http';
 import { Application } from 'express';
+import { verifyToken } from '../helpers/JWT';
 import socketIO, { Server } from 'socket.io';
+import http, { Server as HttpServer } from 'http';
 
 export default class Socket {
 	private io: Server;
@@ -22,7 +23,11 @@ export default class Socket {
 	initializeEvents() {
 		this.io.on('connection', (socket) => {
 			socket.on('sendMessage', (data) => {
-				this.io.sockets.emit('newMessage', data);
+				let message = JSON.parse(data);
+
+				if (verifyToken(message.token)) {
+					this.io.sockets.emit('newMessage', data);
+				}
 			});
 
 			socket.on('userConnect', (data) => {

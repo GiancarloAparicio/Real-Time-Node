@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { Request } from 'express';
 import { APP_KEY_JWT } from '../../config/config';
+import Reply from '../services/Reply';
+import AuthorizationException from '../errors/exceptions/AuthorizationException';
 
 /**
  * Digitally sign the "data" object,
@@ -22,5 +24,19 @@ export function verifyJWT(req: Request) {
 	if (req.headers.authorization) {
 		let token = req.headers.authorization.split(' ')[1];
 		return jwt.verify(token, `${APP_KEY_JWT}`);
+	}
+}
+
+/**
+ * Check if the token is valid
+ * @param token
+ */
+export function verifyToken(token: string): boolean {
+	try {
+		let decoded = jwt.verify(token, `${APP_KEY_JWT}`);
+		return decoded ? true : false;
+	} catch (error) {
+		Reply.next(new AuthorizationException({ token: 'Invalid' }, 'Forbidden'));
+		return false;
 	}
 }
