@@ -8,9 +8,11 @@
 >
 > npm install && npm run serve <> http://localhost:8000/chat (Default)
 
-### Preview
+### Preview Gif
 
 ![Gif](./docs/chat.gif)
+
+### Preview Image
 
 ![Register](./docs/register.png)
 
