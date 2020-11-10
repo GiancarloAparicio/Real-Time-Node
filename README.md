@@ -10,6 +10,8 @@
 
 ### Preview
 
+![Gif](./docs/chat.gif)
+
 ![Register](./docs/register.png)
 
 ![Login](./docs/login.png)
