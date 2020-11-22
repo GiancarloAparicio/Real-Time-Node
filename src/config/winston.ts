@@ -3,8 +3,8 @@ import fs from 'fs-extra';
 import { APP_ENV } from '../config/config';
 import { createLogger, format, transports } from 'winston';
 
-if (!fs.existsSync(path.join(__dirname, '../app/errors/logs'))) {
-	fs.mkdirSync(path.join(__dirname, '../app/errors/logs'));
+if (!fs.existsSync(path.join(__dirname, '..','app','errors','logs'))) {
+	fs.mkdirSync(path.join(__dirname, '..','app','errors','logs'));
 }
 
 const log = createLogger({
@@ -28,7 +28,7 @@ const log = createLogger({
 		new transports.File({
 			maxsize: 5120000,
 			maxFiles: 4,
-			filename: path.join(__dirname, '../app/errors/logs', 'logs-express.log'),
+			filename: path.join(__dirname, '..','app','errors','logs', 'logs-express.log'),
 		}),
 	],
 });

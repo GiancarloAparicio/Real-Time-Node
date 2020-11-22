@@ -4,7 +4,4 @@ build
 
 *.sqlite
 
-**/**/*.log
-src/app/exceptions/logs/*.log
-
 package-lock.json

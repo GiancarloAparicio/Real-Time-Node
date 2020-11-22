@@ -20,8 +20,6 @@ const handleErrors = (
 		});
 	}
 
-	console.log('handle error');
-
 	let error = err.build();
 
 	if (err instanceof ValidationException) {
@@ -48,8 +46,6 @@ const handleErrors = (
 		res.status(error.code).json(error);
 	}
 
-	//!! Fix the error that occurs with next()
-	//TODO Calling next() passes the HandleError middleware, but then returns control to the middleware where next() was used
 };
 
 export default handleErrors;
