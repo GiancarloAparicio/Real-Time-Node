@@ -3,8 +3,8 @@ include ../components/InputChat
 mixin Home
     div(class="d-flex col-12 col-sm-10 col-md-6 col-lg-4 col-xl-4 mx-auto overflow-auto")
         div(v-for="user in users" class="mx-2" )
-            img(:src="'http://lorempixel.com/350/230/cats/'+(user.id)" :class="{offline:!user.status}" class="d-block photo rounded-circle" alt="photo")
-            h6() {{user.name}}
+            p( :class="{offline:!user.status}" class=" photo rounded-circle") {{ user.name }}
+            h6 {{user.name}}
                 span(class="status " :class="{'bg-dark':!user.status, 'bg-success':user.status}")
                 
     form(method="POST" @submit.prevent="sendMessage" class="col-12 col-sm-10 col-md-6 col-lg-8 col-xl-8 mx-auto chat-component")

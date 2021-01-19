@@ -4,7 +4,7 @@ import User from '../../database/models/User';
 import QuerySqlException from '../errors/exceptions/QuerySqlException';
 
 class UserRepository {
-	async create(user: any) {
+	async createOrFail(user: any) {
 		try {
 			let newUser = getRepository(User).create(user);
 			let response = await getRepository(User).save(newUser);

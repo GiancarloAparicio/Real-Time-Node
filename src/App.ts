@@ -5,7 +5,7 @@ import * as www from './config/www';
 import { createConnection } from 'typeorm';
 import routes from './routes/index.routes';
 import handleError from './app/errors/handle';
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import AuthJWT from './app/middlewares/auth/JWT';
 import { APP_PORT, APP_ENV, APP_PATH_FILE } from './config/config';
 
@@ -52,8 +52,8 @@ export default class App {
 			this.app.use(`/${route}`, routes[route]);
 		}
 
-		this.app.get('*', function (req, res) {
-			res.status(404).send('what???');
+		this.app.get('*', function (req: Request, res: Response) {
+			return res.render('./pages/errors/404');
 		});
 	}
 

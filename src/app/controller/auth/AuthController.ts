@@ -5,18 +5,21 @@ import UserRepository from '../../repositories/UserRepository';
 import { encryptTo, matchEncryptTo, removeProperty } from '../../helpers/helper';
 
 export default class AuthController {
+
 	static async login(req: Request, res: Response) {
 		let { email, password } = req.body;
 
-		let user = await UserRepository.findOneOrFail(email);
+		let currentUser = await UserRepository.findOneOrFail(email);
 
-		if (user) {
-			if (await matchEncryptTo(password, user.password)) {
+		if ( currentUser ) {
+			if (await matchEncryptTo( password, currentUser.password )) {
+
 				return Reply.status(200).success('Login success', {
-					user: removeProperty(user, 'password'),
-					token: signJWT(user),
+					user: removeProperty(currentUser, 'password'),
+					token: signJWT(currentUser),
 				});
 			} else {
+				
 				return Reply.status(403).badRequest(
 					'Forbidden',
 					'Password incorrect'
@@ -26,37 +29,34 @@ export default class AuthController {
 	}
 
 	static async create(req: Request, res: Response) {
-		let { validated } = req.body;
+		let { validated } = req.body;  //Validated user data
 
 		let userValidate = {
 			...validated,
 			password: await encryptTo(validated.password),
 		};
 
-		console.log(userValidate);
+		let currentUser = await UserRepository.createOrFail(userValidate);
 
-		let user = await UserRepository.create(userValidate);
-		console.log(user);
-
-		if (user) {
+		if (currentUser) {
 			return Reply.status(201).success('User created', {
-				user: removeProperty(user, 'password'),
-				token: signJWT(user),
+				user: removeProperty(currentUser, 'password'),
+				token: signJWT(currentUser),
 			});
 		}
 	}
 
 	static async update(req: Request, res: Response) {
-		let { validated, decoded } = req.body;
+		let { validated, token } = req.body;
 
 		let userValidate = {
 			...validated,
-			password: await encryptTo(validated.password),
+			password: await encryptTo( validated.password ),
 		};
 
-		let user = await UserRepository.update(decoded.id, userValidate);
+		let user = await UserRepository.update( token.id, userValidate );
 		if (user) {
-			return Reply.status(200).success('User update', user);
+			return Reply.status(200).success( 'User update', user );
 		}
 	}
 }

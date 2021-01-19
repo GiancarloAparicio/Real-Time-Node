@@ -1,0 +1,37 @@
+version: '3'
+services:
+  chat-node:
+    image: node:13.7
+    container_name: chat-node
+    ports:
+      - "8000:8000"
+    volumes:
+      - $PWD/:/var/www/html:delegated
+    depends_on:
+      - chat-mysql
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    networks:
+      - chat
+    working_dir: /var/www/html
+
+  chat-mysql:
+    image: mysql:5.7.29
+    container_name: chat-mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: chat-node
+      MYSQL_USER: chat-node
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - chat
+networks:
+  chat:
+

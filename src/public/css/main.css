@@ -5,7 +5,14 @@ a {
 .photo {
 	width: 50px !important;
 	height: 50px !important;
+	margin-bottom: 5px;
 	object-fit: cover;
+
+	background-color: rgb(255, 115, 115);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .status {
